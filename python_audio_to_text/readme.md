@@ -1,63 +1,80 @@
-++++++++++++++++++PARA CREAR PROJECTO NUEVO
+# 🚀 How to Create a New Project
 
-# 1 step
+## 1. Create a Virtual Environment
 
-# crear entorno virtual
-
+```bash
 py -m venv venv
 python -m venv venv
+```
 
-Desglose del comando
+**Command breakdown:**
 
-py
-Es el Python Launcher (el que ya estás usando en Windows). Llama a la versión de Python que tienes instalada (3.13.4 en tu caso).
+- **`py`**  
+  The Python Launcher (already on Windows). It calls the installed Python version (3.13.4 in your case).  
 
--m venv
-Le dice a Python: “ejecuta el módulo venv”.
+- **`-m venv`**  
+  Tells Python: “run the `venv` module.”  
 
-venv es un módulo incluido en Python que sirve para crear entornos virtuales.
+- **`venv` (at the end)**  
+  The folder name where the virtual environment will be created.  
+  You can name it as you like (`venv`, `.venv`, `env`, etc.), but the convention is usually `venv`.
 
-venv (al final)
-Es el nombre de la carpeta donde se creará el entorno virtual.
+### Activate the virtual environment
 
-Puedes llamarla como quieras (venv, .venv, env, etc.), pero por convención casi siempre se usa venv.
+- **Windows / Mac (Git Bash or terminal):**
+  ```bash
+  source venv/Scripts/activate
+  ```
 
-# activar entorno virtual (windows / Mac)
+- **Windows PowerShell:**
+  ```bash
+  venv\Scripts\activate
+  ```
 
-source venv/Scripts/activate
+---
 
-# activar entorno virtual (Windows PowerShell)
+## 2. Install Dependencies
 
-venv\Scripts\activate
-
-# 2 Step 2) Install dependencies
-
-faster-whisper is fast and runs fully offline (CPU or GPU).
+```bash
 pip install faster-whisper soundfile tqdm
+```
 
-# 3 para saber que paquetes usa este projecto
+> `faster-whisper` runs completely offline and works with CPU or GPU.  
 
-pip freeze > requirements.txt
--nota: esto es para instalar si no existe venv
-pip install -r requirements.txt
+---
 
-# RUN IT
+## 3. Manage Project Packages
 
-# Auto language detection
+- Save installed packages:
+  ```bash
+  pip freeze > requirements.txt
+  ```
 
+- Reinstall dependencies (if no `venv` exists):
+  ```bash
+  pip install -r requirements.txt
+  ```
+
+---
+
+## 4. Run It
+
+### Auto language detection
+```bash
 python transcribe.py meeting.m4a --model small
+```
 
-# Force Spanish and enable VAD for noisy audio
-
+### Force Spanish + VAD (for noisy audio)
+```bash
 python transcribe.py meeting.m4a --model small --language es --vad
 py transcribe.py ejemplo.mp3 --model small --language es --vad
+```
 
-## Model size guide (pick one)
+---
 
-tiny/base: fastest, lower accuracy.
+## 5. Model Size Guide
 
-small: good balance (recommended start).
-
-medium: better accuracy, slower.
-
-large-v3: highest accuracy, slowest & heaviest.
+- **tiny / base** → fastest, but lowest accuracy  
+- **small** → good balance (**recommended start**)  
+- **medium** → higher accuracy, slower  
+- **large-v3** → best accuracy, but slowest and heaviest  
